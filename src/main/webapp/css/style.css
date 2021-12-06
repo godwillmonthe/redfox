@@ -20,13 +20,16 @@ nav {
   justify-content: space-around;
   align-items: center;
   width: 100%;
+  padding: 10px;
   border: 1px solid rgba(0, 0, 0, 0.04);
   background-color:#32be8f;
   position: fixed;
   left: 0;
   top: 0;
+  margin-bottom: 30px;
   z-index: 100;
 }
+
 .logo img {
   height: 35px;
 }
@@ -73,6 +76,11 @@ nav .menu li a:hover {
 }
 #main {
   padding-top: 80px;
+  background-color: #ffffff;
+}
+
+#columns {
+	padding-top: 80px;
   background-color: #ffffff;
 }
 .showcase-box {

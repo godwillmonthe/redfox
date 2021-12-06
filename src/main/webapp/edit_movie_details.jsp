@@ -7,7 +7,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>RedFox Agency | New Movie</title>
+    <title>RedFox Agency | Edit Movie Details</title>
     <link rel="stylesheet" href="css/style.css" />
     <link rel="stylesheet" href="css/lightslider.css" />
     <link rel="stylesheet" href="css/style_add_movie.css"/>
@@ -41,9 +41,6 @@
 	</c:url>
 	<c:url var="adminHome" value="admin">
 	</c:url>
-	<c:url var="addmovie" value="movieController">
-		<c:param name="option" value="ADD"/>
-	</c:url>
       <!-- menu -->
       <ul class="menu">
         <li><a href="${adminHome}">Home</a></li>
@@ -59,55 +56,58 @@
         <i class="fas fa-search"></i>
       </div>
     </nav>
+    <c:url var="updatemovie" value="admin">
+		<c:param name="option" value="UPDATE"/>
+	</c:url>
     <section class="registration">
 	    <div class="container">
-	    	<div class="title">Add New Movie</div>
-	    	<form action="${addmovie}" method="POST" enctype="multipart/form-data" autocomplete="off">
+	    	<div class="title">Update Movie</div>
+	    	<form action="${updatemovie}" method="POST" enctype="multipart/form-data" autocomplete="off">
 	    		<span style="color: green;">${message}</span>
 	    		<div class="movie-details">
+	    		<div class="input-box">
+	    				<span class="details">Movie ID</span>
+	    				<input type="text" style="cursor: not-allowed;" name="movie_id" value="${editMovie.movie_id}" disabled>
+	    			</div>
 	    			<div class="input-box">
 	    				<span class="details">Title</span>
-	    				<input type="text" name="movie_title" placeholder="Enter movie title.." required>
+	    				<input type="text"  name="movie_title" value="${editMovie.title}" required>
 	    			</div>
 	    			<div class="input-box">
 	    				<span class="details">Description</span>
-	    				<input type="text" name="movie_desc" placeholder="Enter movie description.." required>
+	    				<input type="text" name="movie_desc" value="${editMovie.description}" required>
 	    			</div>
 	    			<div class="input-box">
 	    				<span class="details">Director</span>
-	    				<input type="text" name="movie_director" placeholder="Enter movie director.." required>
+	    				<input type="text" name="movie_director" value="${editMovie.director}" required>
 	    			</div>
 	    			<div class="input-box">
 	    				<span class="details">Cast 1</span>
-	    				<input type="text" name="movie_cast_one" placeholder="Enter movie cast one.." required>
+	    				<input type="text" name="movie_cast_one" value="${editMovie.cast_one}" required>
 	    			</div>
 	    			<div class="input-box">
 	    				<span class="details">Cast 2</span>
-	    				<input type="text" name="movie_cast_two" placeholder="Enter movie cast two.." required>
+	    				<input type="text" name="movie_cast_two" value="${editMovie.cast_two}" required>
 	    			</div>
 	    			<div class="input-box">
 	    				<span class="details">Cast 3</span>
-	    				<input type="text" name="movie_cast_three" placeholder="Enter movie cast three.." required>
+	    				<input type="text" name="movie_cast_three" value="${editMovie.cast_three}" required>
 	    			</div>
 	    			<div class="input-box">
 	    				<span class="details">Genre</span>
-	    				<input type="text" name="movie_genre" placeholder="Enter movie genre.." required>
+	    				<input type="text" name="movie_genre" value="${editMovie.genre}" required>
 	    			</div>
 	    			<div class="input-box">
 	    				<span class="details">Trailer Link</span>
-	    				<input type="text" name="movie_trailer_link" placeholder="Enter movie trailer link.." required>
+	    				<input type="text" name="movie_trailer_link" value="${editMovie.trailer_link}" required>
 	    			</div>
 	    			<div class="input-box">
 	    				<span class="details">Year Of Release</span>
-	    				<input type="text" name="movie_year_of_release" placeholder="Enter year of release.." required>
+	    				<input type="text" name="movie_year_of_release" value="${editMovie.year_of_release}" required>
 	    			</div>
-	    			<div class="input-box">
-	    				<span class="details">Thumbnail</span>
-	    				<input type="file" name="movie_thumbnail">
-    				</div>
 	    		</div>
 	    		<div class="button">
-	    			<input type="submit" value="Add Movie"/>
+	    			<input type="submit" value="Update Movie"/>
 	    		</div>
 	    	</form>
 	    </div>

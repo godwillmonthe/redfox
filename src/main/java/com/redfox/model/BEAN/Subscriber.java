@@ -6,6 +6,16 @@ public class Subscriber {
 	private String firstname, surname, emailAddress, password;
 	private List<String> genre;
 	
+	public Subscriber() {
+		super();
+	}
+	public Subscriber(String firstname, String surname, String emailAddress, String password) {
+		super();
+		this.firstname = firstname;
+		this.surname = surname;
+		this.emailAddress = emailAddress;
+		this.password = password;
+	}
 	public String getFirstname() {
 		return firstname;
 	}

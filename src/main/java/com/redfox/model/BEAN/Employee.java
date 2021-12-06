@@ -2,28 +2,18 @@ package com.redfox.model.BEAN;
 
 public class Employee {
 	private String firstname, lastname, emailAddress, password;
-	public boolean isAdmin;
 
 	public Employee() {
 		super();
 		// TODO mmmmhhh
 	}
 
-	public Employee(String firstname, String lastname, String emailAddress, String password, boolean isAdmin) {
+	public Employee(String firstname, String lastname, String emailAddress, String password) {
 		super();
 		this.firstname = firstname;
 		this.lastname = lastname;
 		this.emailAddress = emailAddress;
 		this.password = password;
-		this.isAdmin = isAdmin;
-	}
-
-	public boolean isAdmin() {
-		return isAdmin;
-	}
-
-	public void setAdmin(boolean isAdmin) {
-		this.isAdmin = isAdmin;
 	}
 
 	public String getFirstname() {

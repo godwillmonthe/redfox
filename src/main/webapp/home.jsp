@@ -1,3 +1,6 @@
+<%@page import="com.redfox.model.BEAN.Movie"%>
+<%@page import="java.util.List"%>
+<%@page import="com.redfox.model.BEAN.Subscriber"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -7,10 +10,13 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>RedFox Agency</title>
+    <title>RedFox Agency | Home</title>
     <link rel="stylesheet" href="css/style.css" />
     <link rel="stylesheet" href="css/lightslider.css" />
-    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon" />
+    <link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png">
+	<link rel="manifest" href="site.webmanifest">
     <!-- font awesome link -->
     <script
       src="https://kit.fontawesome.com/c8e4d183c2.js"
@@ -19,6 +25,12 @@
     <script src="js/JQuery3.3.1.js"></script>
     <script src="js/lightslider.js"></script>
   </head>
+<%
+	Subscriber active = (Subscriber)session.getAttribute("active_subscriber");
+	if(active == null) {
+		response.sendRedirect("index.jsp?error=not%20loggedin");
+	}
+%>
 <body>
 <!-- navigation bar -->
     <nav>
@@ -26,13 +38,18 @@
       <a href="#" class="logo">
         <img src="images/logo.png" alt="logo" />
       </a>
+		<c:url var="listmovies" value="movieController">
+			<c:param name="option" value="LOAD"/>
+		</c:url>
+		<c:url var="home" value="movieController">
+		</c:url>
       <!-- menu -->
       <ul class="menu">
-        <li><a href="#">Home</a></li>
-        <li><a href="#">Link 2</a></li>
-        <li><a href="#">Link 3</a></li>
-        <li><a href="#">Link 4</a></li>
-        <li><a href="#">Link 5</a></li>
+        <li><a href="${home}">Home</a></li>
+        <li><a href="${listmovies}">View Movies</a></li>
+        <li><a href="recommended_movies.jsp">Recommended Movies</a></li>
+        <li><a href="#">About</a></li>
+        <li><a href="logout.jsp">Log Out</a></li>
       </ul>
       <!-- search bar -->
       <div class="search">
@@ -45,31 +62,19 @@
 	<section id="main">
       <!--showcase----------------------->
       <!--heading------------->
-      <h1 class="showcase-heading">New Release</h1>
+      <h1 class="showcase-heading">Showcase Movies</h1>
       
       <ul id="autoWidth" class="cs-hidden">
         <!-- loop box -->
-        <% 
-        int ar[] = {1, 2, 3, 4, 5};
-      	int i, x;
-      
-      	// iterating over an array
-      	for (i = 0; i < ar.length; i++) {
-
-          // accessing each element of array
-      	%>
-        <a href="movie_details.jsp">
+        <c:forEach var="shmovie" items="${New_Release}">
         <li class="item-a">
-        	<%-- <%
-				String id = request.getParameter("id");
-			%> --%>
           <!--showcase-box------------------->
           <div class="showcase-box">
-            <img src="getNewReleaseImage.jsp?id= <%= ar[i] %>" />
+            <img src="getNewReleaseImage.jsp?id= ${shmovie}" />
           </div>
         </li>
-        </a>
-        <% } %>
+        </c:forEach>
+        <!-- End of loop box -->
       </ul>
     </section>
     <!--latest-movies---------------------->
@@ -78,39 +83,29 @@
       <!--slider------------------->
       <ul id="autoWidth2" class="cs-hidden">
         <!--slide-box-1------------------>
+         
+      	<c:forEach var="movie" items="${Home_Movies}">
+      	<c:url var="details" value="movieController">
+			<c:param name="option" value="DISPLAY"/>
+			<c:param name="identifier" value="${movie.movie_id}" />
+		</c:url>
+      	 <a href="${details}">
         <li class="item-a">
           <div class="latest-box">
             <!--img-------->
             <div class="latest-b-img">
-              <img src="getImage.jsp?id=${movie_list.id }" />
+              <img src="getImage.jsp?id=${movie.movie_id}" />
             </div>
             <!--text---------->
             <div class="latest-b-text">
-              <strong>${movie_list.title} ${movie_list.year}</strong>
-              <p>${movie_list.genre} Movie</p>
+              <strong>${movie.title} | ${movie.year_of_release}</strong>
+              <p>${movie.genre} Movie</p>
             </div>
           </div>
         </li>
-      </ul>
-    </section>
-    <!--movies---------------------------->
-    <div class="movies-heading">
-      <h2>Movies</h2>
-    </div>
-    <section id="movies-list">
-      <!--box-1------------------------>
-      <div class="movies-box">
-        <!--img------------>
-        <div class="movies-img">
-          <div class="quality">HDRip</div>
-          <img src="images/l-1.jpg" />
-        </div>
-        <!--text--------->
-        <a href="#">
-          ${Movie_list.title} | HDRip 1080p
-          HD
         </a>
-      </div>
+        </c:forEach>
+      </ul>
     </section>
     <script>
       $(document).ready(function () {

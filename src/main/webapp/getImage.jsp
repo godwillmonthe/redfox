@@ -11,7 +11,7 @@
 <%
 String id = request.getParameter("id");
  
-String connectionURL = "jdbc:mysql://localhost:3306/test";
+String connectionURL = "jdbc:mysql://localhost:3306/redfox";
 String user = "root";
 String pass = "My5qlP@ssword";
  

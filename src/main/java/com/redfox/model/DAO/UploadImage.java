@@ -33,15 +33,17 @@ public class UploadImage extends HttpServlet {
 		int result = 0;
 		Connection con = null;
 		Part part = request.getPart("image");
+		int id = Integer.parseInt(request.getParameter("id"));
 		 
 		if(part != null) {
 			try {
 				Class.forName("com.mysql.cj.jdbc.Driver");
 			    con = datasource.getConnection();
 			    
-			    PreparedStatement ps = con.prepareStatement("insert into showcase_images(image_binary) values(?)");
+			    PreparedStatement ps = con.prepareStatement("update movies set movie_thumbnail = ? where movie_id = ?;");
 			    InputStream is = part.getInputStream();
 			    ps.setBlob(1, is);
+			    ps.setInt(2, id);
 			    result = ps.executeUpdate();
 			    } catch(Exception e) {
 				e.printStackTrace();
